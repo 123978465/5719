@@ -1,0 +1,61 @@
+###服务启动端口号
+server:
+  port: 8078
+  servlet:
+    context-path: /mr
+
+spring:
+  application:
+    name: springboot-nacos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/MRsimulation?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456789
+  ###设置时区为上海时区，即东八区
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+###配置上传文件
+  servlet:
+    multipart:
+      ## 上传文件总的最大值
+      max-request-size: 6000MB
+      ## 单个文件的最大值
+      max-file-size: 6000MB
+  ### 热部署
+  devtools:
+    restart:
+      enabled: true
+  thymeleaf:
+    cache: false
+  minio:
+    endpoint:
+    access-key: minioadmin      #key就是docker初始化是设置的，密钥相同
+    secret-key: minioadmin
+    url: http://172.16.36.91:9000
+    bucket-name: mrproject   # 登陆minio创建的文件桶
+
+#自定义配置参数
+base:
+  #本机ip，不要用localhost或127.0.0.1
+  bindIp: 192.40.32.223
+
+## 研发人员工具，用于部署前端项目，部署在服务器的位置（即，你nginx指定访问的文件夹位置），压缩包必须在dist目录
+pageFile:
+  uploadPath: /data/xscan
+
+mybatis-plus:
+  # mapper映射文件,这个mapper是resources下的mapper
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.keyware.MR.entity
+path:
+  #备份文件存放地址
+  mysqlFilePath: D:\src\mysqlFilePath\
+  #系统备份恢复脚本位置
+  mysqlPath: D:\src\mysqlPath\
+  filePath: D:\src\data\
+
+
+
